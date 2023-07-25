@@ -1,0 +1,12 @@
+{% extends 'main/index.html' %}
+
+{% block entrace  %}
+    <div class="cover">
+        <div class="modal">
+                <a href="/"><span class="close">&times;</span></a>
+                <h2>Вы действительно желаете выйти из аккаунта?</h2>
+                    <a href="{% url 'logout' %}" ><button class="header-buttons-signIn">Да</button></a>
+                    <a href="/"><button class="header-buttons-registration">Нет</button></a>
+        </div>
+    </div>
+{% endblock %}

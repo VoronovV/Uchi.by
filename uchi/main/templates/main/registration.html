@@ -1,0 +1,21 @@
+{% extends 'main/index.html' %}
+
+{% block entrace  %}
+    <div class="cover">
+        <div class="modal">
+                <a href="/"><span class="close">&times;</span></a>
+                <h2>РЕГИСТРАЦИЯ</h2>
+                <form class="form" action="" method="post">
+                    {% csrf_token %}
+                    <input class="inputReg" type="text" placeholder="Логин" id="username" name="username" required>
+                    <input class="inputReg" type="text" placeholder="Пароль" id="password" name="password" required>
+                    <input class="inputReg" type="text" placeholder="Повторите пароль" id="repeatPassword" name="repeatPassword" required>
+                    <button type="submit">Зарегистрироваться</button>
+                </form>
+                <div class="tip">
+                    <p>Уже есть аккаунт?</p>
+                    <a href="/entrace">Авторизуйтесь!</a>
+                </div>
+        </div>
+    </div>
+{% endblock %}

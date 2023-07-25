@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <script type="text/javascript" src="{% static 'main/js/script.js' %}"></script>
+    <title>УЧИ.бел</title>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <a href=""><img src="{% static 'main/image/main_logo.png' %}" alt="logo uchi.bel"></a>
+        </div>
+        <nav class="header-nav">
+            <a class="header-nav-link" href="">Каталог</a>
+            <a class="header-nav-link" href="">Преподавание</a>
+        </nav>
+        <div class="header-buttons">
+
+                {% if auth.auth == 1 %}
+                <a href="/exit"><button class="header-buttons-signIn">Выйти</button></a>
+                {% else %}
+                <a href="/entrace"><button id="ent" class="header-buttons-signIn">Войти</button></a>
+                <a href="/registration"><button id="reg" class="header-buttons-registration">Регистрация</button></a>
+                {% endif %}
+
+
+
+        </div>
+    </header>
+    <main class="main">
+        <div class="full_info-main" >
+            <div class="course-page-info">
+
+            <h4>Программа курса</h4>
+            {% for el in lectures %}
+                <div class="lecture">
+                    <h5>{{el.title}}</h5>
+                 {% for lesson in el.lessons_set.all %}
+                    <ul>
+                        <li>{{lesson.title}}</li>
+                    </ul>
+                {% endfor %}
+                </div>
+
+            {% endfor %}
+            </div>
+            <div class="full_info-main-text">
+                {% for el in lectures %}
+                <div>
+                    <h3>{{el.title}}</h3>
+                 {% for lesson in el.lessons_set.all %}
+                        <h4>
+                            {{lesson.title}}
+                        </h4>
+                        <p>
+                            {{lesson.info}}
+                        </p>
+                {% endfor %}
+                </div>
+
+            {% endfor %}
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-left">
+            <p>2023 УЧИ.БЕЛ</p>
+            <div class="socialNetwork">
+                <a href="https://vk.com/anshr"><img src="{% static 'main/image/VK Circled.png' %}" alt="vk"></a>
+                <a href=""><img src="{% static 'main/image/Facebook.png' %}" alt="facebook"></a>
+                <a href=""><img src="{% static 'main/image/Twitter Circled.png' %}" alt="twitter"></a>
+                <a href="https://www.instagram.com/psixyliy/"><img src="{% static 'main/image/Instagram Circle.png' %}" alt="instagram"></a>
+                <a href=""><img src="{% static 'main/image/Telegram.png' %}" alt="telegram"></a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <a href="">Команда</a>
+            <a href="">О проекте</a>
+        </div>
+    </footer>
+    {% block entrace %}
+    {% endblock %}
+
+</body>
+</html>

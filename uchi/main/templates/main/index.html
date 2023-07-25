@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <script type="text/javascript" src="{% static 'main/js/script.js' %}"></script>
+    <title>УЧИ.бел</title>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <a href=""><img src="{% static 'main/image/main_logo.png' %}" alt="logo uchi.bel"></a>
+        </div>
+        <nav class="header-nav">
+            <a class="header-nav-link" href="">Каталог</a>
+            <a class="header-nav-link" href="">Преподавание</a>
+        </nav>
+        <div class="header-buttons">
+
+                {% if auth.auth == 1 %}
+                <a href="/exit"><button class="header-buttons-signIn">Выйти</button></a>
+                {% else %}
+                <a href="/entrace"><button id="ent" class="header-buttons-signIn">Войти</button></a>
+                <a href="/registration"><button id="reg" class="header-buttons-registration">Регистрация</button></a>
+                {% endif %}
+
+
+
+        </div>
+    </header>
+    <main class="main">
+        <div class="searchPlace">
+            <!-- раскрывающийся список -->
+            <select class="searchPlace-select">
+                <option selected disabled hidden>Фильтр</option>
+                <option value="value1">Математика</option>
+                <option value="value2">Физика</option>
+                <option value="value3">Информатика</option>
+                <option value="value4">Английский язык</option>
+                <option value="value5">Русский язык</option>
+                <option value="value6">Химия</option>
+                <option value="value7">Биология</option>
+              </select>
+            <input class="searchPlace-input" type="text" placeholder="Поиск">
+            <button class="header-buttons-registration">Искать</button>
+        </div>
+        <div class="onlineCourse-mainText-div">
+            <h2 class="onlineCourse-mainText">Онлайн курсы</h2>
+            <img src="{% static 'main/image/Down Arrow.png' %}" alt="Arrow">
+        </div>
+
+        <section class="subjects">
+                {% for el in courses %}
+                 <a class="subjects-card course" href="{% url 'courseDetail' course_id=el.id %}">
+                    <div class="course-card">
+                        <p class="course-title">{{el.title}}</p>
+                        <p>{{el.idTeacher}}</p>
+                        <p class="course-info">Оценка от УЧИ.БЕЛ: {{el.idMark}}/10</p>
+                        <p class="course-info">{{el.duration}} ч</p>
+                    </div>
+                        <img src="{{el.idSubject.idImage.image.url}}" alt="">
+                 </a>
+                {% endfor %}
+        </section>
+
+
+
+        <div class="onlineCourse-mainText-div">
+            <h2 class="onlineCourse-mainText">Предметы</h2>
+            <img src="{% static 'main/image/Down Arrow.png' %}" alt="Arrow">
+        </div>
+        <section class="subjects">
+            <a class="subjects-card" href="">
+                <h4>Математика</h4>
+                <img src="{% static 'main/image/Math.png' %}" alt="math">
+            </a>
+            <a class="subjects-card" href="" >
+                <h4>Информатика</h4>
+                <img src="{% static 'main/image/Informatics.png' %}" alt="Informatics">
+            </a>
+            <a class="subjects-card" href="">
+                <h4>Физика</h4>
+                <img src="{% static 'main/image/Physics.png' %}" alt="Physics">
+            </a>
+            <a class="subjects-card" href="">
+                <h4>Биология</h4>
+                <img src="{% static 'main/image/Leaf.png' %}" alt="biology">
+            </a>
+            <a class="subjects-card" href="">
+                <h4>Химия</h4>
+                <img src="{% static 'main/image/Test Tube.png' %}" alt="chemistry">
+            </a>
+            <a class="subjects-card" href="">
+                <h4>Английский язык</h4>
+                <img src="{% static 'main/image/Great Britain.png' %}" alt="english">
+            </a>
+            <a class="subjects-card" href="">
+                <h4>Русский язык</h4>
+                <img src="{% static 'main/image/Copybook.png' %}" alt="russian">
+            </a>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-right">
+            <p>2023 УЧИ.БЕЛ</p>
+            <div class="socialNetwork">
+                <a href="https://vk.com/anshr"><img src="{% static 'main/image/VK Circled.png' %}" alt="vk"></a>
+                <a href=""><img src="{% static 'main/image/Facebook.png' %}" alt="facebook"></a>
+                <a href=""><img src="{% static 'main/image/Twitter Circled.png' %}" alt="twitter"></a>
+                <a href="https://www.instagram.com/psixyliy/"><img src="{% static 'main/image/Instagram Circle.png' %}" alt="instagram"></a>
+                <a href=""><img src="{% static 'main/image/Telegram.png' %}" alt="telegram"></a>
+            </div>
+        </div>
+        <div class="footer-left">
+            <a href="">Команда</a>
+            <a href="">О проекте</a>
+            <a href="admin/">Администраторы</a>
+        </div>
+    </footer>
+    {% block entrace %}
+    {% endblock %}
+
+</body>
+</html>
